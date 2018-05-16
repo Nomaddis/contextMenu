@@ -1,6 +1,5 @@
-// console.log("sfsfsf");
-
 (function() {
+
     /**
      * list of items
      * @type {[*]}
@@ -8,7 +7,7 @@
      * @param link - href for link
      * @param status - active or inactive
      */
-    var menuItems = [
+    let menuItems = [
         {id: 'item1', link: '', status: 'active'},
         {id: 'item2', link: '', status: 'active'},
         {id: 'item3', link: '', status: 'active',
@@ -51,10 +50,10 @@
 
     document.write(startMenuBuild(menuItems));
     function buildMenu(menuItems, submenu) {
-        var result = '';
+        let result = '';
         (submenu) ? result += '<ul>' : result += '<ul id="innerMenu">';
-        for (var i = 0; i < menuItems.length; i++) {
-            var item = menuItems[i];
+        for (let i = 0; i < menuItems.length; i++) {
+            let item = menuItems[i];
             if (item.status === 'inactive') {
                 result += '<li class="inactive">';
                 result += item.id;
@@ -77,16 +76,16 @@
         return result;
     }
     function startMenuBuild(menuItems) {
-        var buildedMenu = '<div id="contextMenu"><div id="scrollUp"></div>';
+        let buildedMenu = '<div id="contextMenu"><div id="scrollUp"></div>';
         buildedMenu += buildMenu(menuItems, false);
         buildedMenu += '<div id="scrollDown"></div></div>';
         return buildedMenu;
     }
-    var menu = document.getElementById("contextMenu");
-    var innerMenu = document.getElementById("innerMenu");
-    var scrollUpButton = document.getElementById("scrollUp");
-    var scrollDownButton = document.getElementById("scrollDown");
-    var menuItemHeight = document.getElementsByClassName("submenu")[0].clientHeight;
+    let menu = document.getElementById("contextMenu");
+    let innerMenu = document.getElementById("innerMenu");
+    let scrollUpButton = document.getElementById("scrollUp");
+    let scrollDownButton = document.getElementById("scrollDown");
+    let menuItemHeight = document.getElementsByClassName("submenu")[0].clientHeight;
 
     /**
      * position of context menu
@@ -114,7 +113,7 @@
      * show context menu
      */
     function show() {
-        var menuHeight = menuItems.length * menuItemHeight;
+        let menuHeight = menuItems.length * menuItemHeight;
         if (menuHeight + parseInt(menu.style.top) >= window.innerHeight) {
             innerMenu.style.height = Math.floor( (window.innerHeight - parseInt(menu.style.top) - scrollUpButton.offsetHeight -
                     scrollDownButton.offsetHeight) / menuItemHeight ) * menuItemHeight + 'px';
@@ -138,12 +137,12 @@
         innerMenu.style.height = "auto";
     }
     (function() {
-        var submenuScope = document.getElementsByClassName("submenu");
-        var submenuStyle = document.getElementsByClassName("wrapper");
-        for(var i = 0; i < submenuScope.length; i++) {
+        let submenuScope = document.getElementsByClassName("submenu");
+        let submenuStyle = document.getElementsByClassName("wrapper");
+        for(let i = 0; i < submenuScope.length; i++) {
             (function(n) {
                 submenuScope[n].addEventListener("mouseover", function() {
-                    var itemTopPosition = submenuScope[n].offsetTop - innerMenu.scrollTop;
+                    let itemTopPosition = submenuScope[n].offsetTop - innerMenu.scrollTop;
                     submenuStyle[n].style.top = itemTopPosition + 'px';
                 })
             })(i);
@@ -160,7 +159,7 @@
         } else {
             eventArgs.returnValue = false;
         }
-        var isVisible = menu.style.visibility === "visible";
+        let isVisible = menu.style.visibility === "visible";
         if (isVisible) {
             hide();
         } else {
