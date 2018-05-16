@@ -1,5 +1,5 @@
 # Context menu
-For custom settings please modify menuItems array
+For custom settings please modify menuItems array.
 For example using xhr request:
 ```
 let menuItems = null;
