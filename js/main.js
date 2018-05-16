@@ -4,8 +4,8 @@
     /**
      * list of items
      * @type {[*]}
-     * @param id - item id
-     * @param link - href for ancor
+     * @param id - item id text
+     * @param link - href for link
      * @param status - active or inactive
      */
     var menuItems = [
@@ -44,9 +44,11 @@
         {id: 'item16', link: '', status: 'inactive'},
         {id: 'item17', link: '', status: 'inactive'}
     ];
+
     /*
      ajax here with menu parameters (menuItems arr)
      */
+
     document.write(startMenuBuild(menuItems));
     function buildMenu(menuItems, submenu) {
         var result = '';
@@ -92,33 +94,28 @@
      */
     function placeMenu(eventArgs) {
         menu.style.zIndex = 99;
-        // menu.style.left = eventArgs.pageX + 5 + 'px';
-        console.log(eventArgs.clientX);
         if(eventArgs.clientX > (document.body.clientWidth - 200) ) {
             menu.style.left = eventArgs.pageX + -document.getElementById('contextMenu').offsetWidth + 'px';
         } else {
             menu.style.left = eventArgs.pageX + 5 + 'px';
         }
-
-
-        // menu.style.top = eventArgs.pageY + 'px';
-        // console.log(eventArgs.clientY);
-        // console.log(document.body.clientHeight);
-        if(eventArgs.clientY > (document.body.clientHeight - 200) ) {
-            menu.style.top = eventArgs.pageY + -100 + 'px';
-        } else {
-            menu.style.top = eventArgs.pageY + 'px';
-        }
+        menu.style.top = eventArgs.pageY + 'px';
+        // if(eventArgs.clientY > (document.body.clientHeight - 200) ) {
+        //     let menu_width = 0;
+        //     menu.style.top = eventArgs.pageY + - document.getElementById('contextMenu').offsetHeight + 'px';
+        //     // menu.style.top = eventArgs.pageY + 'px';
+        // }
+        // else {
+        //     menu.style.top = eventArgs.pageY + 'px';
+        // }
     }
 
-    /**
+    /*
      * show context menu
      */
     function show() {
         var menuHeight = menuItems.length * menuItemHeight;
-        console.log(menuHeight);
         if (menuHeight + parseInt(menu.style.top) >= window.innerHeight) {
-            console.log('1 enter');
             innerMenu.style.height = Math.floor( (window.innerHeight - parseInt(menu.style.top) - scrollUpButton.offsetHeight -
                     scrollDownButton.offsetHeight) / menuItemHeight ) * menuItemHeight + 'px';
             scrollUpButton.style.display = "block";
@@ -126,7 +123,6 @@
             innerMenu.style.overflow = "hidden";
             menu.style.visibility = "visible";
         } else {
-            console.log('2 enter');
             scrollUpButton.style.display = "none";
             scrollDownButton.style.display = "none";
             innerMenu.style.overflow = "visible";
@@ -134,7 +130,7 @@
             menu.style.visibility = "visible";
         }
     }
-    /**
+    /*
      * hide context menu
      */
     function hide() {
@@ -154,20 +150,9 @@
         }
     })();
 
-    /**
+    /*
      * click and show context menu
      */
-    // document.getElementById("testarea").addEventListener("click", function(eventArgs) {
-    //     // eventArgs = (eventArgs) ? eventArgs : ((event) ? event : null);
-    //     var isVisible = menu.style.visibility === "visible";
-    //     if (isVisible) {
-    //         hide();
-    //     } else {
-    //         placeMenu(eventArgs);
-    //         show();
-    //     }
-    // });
-
     document.getElementById('testarea').oncontextmenu = function (eventArgs) {
         eventArgs = (eventArgs) ? eventArgs : ((event) ? event : null);
         if (typeof eventArgs.preventDefault != "undefined") {
